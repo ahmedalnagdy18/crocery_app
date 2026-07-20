@@ -32,72 +32,69 @@ class _HomePageState extends State<HomePage> {
         return Scaffold(
           floatingActionButton: Builder(
             builder: (context) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 50),
-                child: FloatingActionButton(
-                  onPressed: () {
-                    showBottomSheet(
-                      backgroundColor: Colors.grey.shade200,
-                      context: context,
-                      builder: (context) {
-                        return Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              TextField(
-                                controller: iconController,
-                                decoration: InputDecoration(
-                                  counterText: '',
-                                  hintText: 'icon',
-                                  hintStyle: TextStyle(color: Colors.grey),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.black),
-                                  ),
+              return FloatingActionButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                    backgroundColor: Colors.grey.shade200,
+                    context: context,
+                    builder: (context) {
+                      return Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextField(
+                              controller: iconController,
+                              decoration: InputDecoration(
+                                counterText: '',
+                                hintText: 'icon',
+                                hintStyle: TextStyle(color: Colors.grey),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black),
                                 ),
-                                maxLength: 10,
                               ),
-                              SizedBox(height: 22),
-                              TextField(
-                                controller: titleController,
-                                decoration: InputDecoration(
-                                  counterText: '',
-                                  hintText: 'title',
-                                  hintStyle: TextStyle(color: Colors.grey),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.black),
-                                  ),
+                              maxLength: 10,
+                            ),
+                            SizedBox(height: 22),
+                            TextField(
+                              controller: titleController,
+                              decoration: InputDecoration(
+                                counterText: '',
+                                hintText: 'title',
+                                hintStyle: TextStyle(color: Colors.grey),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black),
                                 ),
-                                maxLength: 10,
                               ),
-                              SizedBox(height: 40),
-                              MaterialButton(
-                                onPressed: () {
-                                  if (titleController.text.isNotEmpty ||
-                                      iconController.text.isNotEmpty) {
-                                    context.read<CroceryCubit>().addItem(
-                                      ItemModel(
-                                        icon: iconController.text,
-                                        name: titleController.text,
-                                      ),
-                                    );
-                                    iconController.clear();
-                                    titleController.clear();
-                                    Navigator.pop(context);
-                                  }
-                                },
-                                color: Colors.blue,
-                                child: Text('Add'),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  backgroundColor: Colors.blue,
-                  child: Icon(Icons.add),
-                ),
+                              maxLength: 10,
+                            ),
+                            SizedBox(height: 40),
+                            MaterialButton(
+                              onPressed: () {
+                                if (titleController.text.isNotEmpty ||
+                                    iconController.text.isNotEmpty) {
+                                  context.read<CroceryCubit>().addItem(
+                                    ItemModel(
+                                      icon: iconController.text,
+                                      name: titleController.text,
+                                    ),
+                                  );
+                                  iconController.clear();
+                                  titleController.clear();
+                                  Navigator.pop(context);
+                                }
+                              },
+                              color: Colors.blue,
+                              child: Text('Add'),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                },
+                backgroundColor: Colors.blue,
+                child: Icon(Icons.add),
               );
             },
           ),
